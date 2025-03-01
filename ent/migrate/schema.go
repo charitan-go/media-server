@@ -8,29 +8,22 @@ import (
 )
 
 var (
-	// MediasColumns holds the columns for the "medias" table.
-	MediasColumns = []*schema.Column{
+	// MediaColumns holds the columns for the "media" table.
+	MediaColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUUID},
 		{Name: "readable_id", Type: field.TypeUUID},
-		{Name: "name", Type: field.TypeString},
-		{Name: "description", Type: field.TypeString, Default: "A charity media"},
-		{Name: "goal", Type: field.TypeFloat64},
-		{Name: "start_date", Type: field.TypeTime},
-		{Name: "end_date", Type: field.TypeTime},
-		{Name: "category", Type: field.TypeEnum, Enums: []string{"FOOD", "HEALTH", "EDUCATION", "ENVIRONMENT", "RELIGION", "HOUSING", "OTHER"}},
-		{Name: "country_code", Type: field.TypeString},
-		{Name: "status", Type: field.TypeEnum, Enums: []string{"PENDING", "APPROVED", "DENIED", "HALTED", "FINISHED", "DELETED"}},
-		{Name: "owner_charity_readable_id", Type: field.TypeString},
+		{Name: "media_type", Type: field.TypeEnum, Enums: []string{"IMAGE", "VIDEO"}},
+		{Name: "project_id", Type: field.TypeString},
 	}
-	// MediasTable holds the schema information for the "medias" table.
-	MediasTable = &schema.Table{
-		Name:       "medias",
-		Columns:    MediasColumns,
-		PrimaryKey: []*schema.Column{MediasColumns[0]},
+	// MediaTable holds the schema information for the "media" table.
+	MediaTable = &schema.Table{
+		Name:       "media",
+		Columns:    MediaColumns,
+		PrimaryKey: []*schema.Column{MediaColumns[0]},
 	}
 	// Tables holds all the tables in the schema.
 	Tables = []*schema.Table{
-		MediasTable,
+		MediaTable,
 	}
 )
 

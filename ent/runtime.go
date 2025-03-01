@@ -18,22 +18,6 @@ func init() {
 	mediaDescReadableID := mediaFields[1].Descriptor()
 	// media.DefaultReadableID holds the default value on creation for the readable_id field.
 	media.DefaultReadableID = mediaDescReadableID.Default.(func() uuid.UUID)
-	// mediaDescName is the schema descriptor for name field.
-	mediaDescName := mediaFields[2].Descriptor()
-	// media.NameValidator is a validator for the "name" field. It is called by the builders before save.
-	media.NameValidator = mediaDescName.Validators[0].(func(string) error)
-	// mediaDescDescription is the schema descriptor for description field.
-	mediaDescDescription := mediaFields[3].Descriptor()
-	// media.DefaultDescription holds the default value on creation for the description field.
-	media.DefaultDescription = mediaDescDescription.Default.(string)
-	// mediaDescGoal is the schema descriptor for goal field.
-	mediaDescGoal := mediaFields[4].Descriptor()
-	// media.GoalValidator is a validator for the "goal" field. It is called by the builders before save.
-	media.GoalValidator = mediaDescGoal.Validators[0].(func(float64) error)
-	// mediaDescCountryCode is the schema descriptor for countryCode field.
-	mediaDescCountryCode := mediaFields[8].Descriptor()
-	// media.CountryCodeValidator is a validator for the "countryCode" field. It is called by the builders before save.
-	media.CountryCodeValidator = mediaDescCountryCode.Validators[0].(func(string) error)
 	// mediaDescID is the schema descriptor for id field.
 	mediaDescID := mediaFields[0].Descriptor()
 	// media.DefaultID holds the default value on creation for the id field.
