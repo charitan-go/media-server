@@ -127,9 +127,9 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 	cfg := c.config
 	cfg.driver = tx
 	return &Tx{
-		ctx:     ctx,
-		config:  cfg,
-		Media: NewMediaClient(cfg),
+		ctx:    ctx,
+		config: cfg,
+		Media:  NewMediaClient(cfg),
 	}, nil
 }
 
@@ -147,9 +147,9 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 	cfg := c.config
 	cfg.driver = &txDriver{tx: tx, drv: c.driver}
 	return &Tx{
-		ctx:     ctx,
-		config:  cfg,
-		Media: NewMediaClient(cfg),
+		ctx:    ctx,
+		config: cfg,
+		Media:  NewMediaClient(cfg),
 	}, nil
 }
 
@@ -252,8 +252,8 @@ func (c *MediaClient) Update() *MediaUpdate {
 }
 
 // UpdateOne returns an update builder for the given entity.
-func (c *MediaClient) UpdateOne(pr *Media) *MediaUpdateOne {
-	mutation := newMediaMutation(c.config, OpUpdateOne, withMedia(pr))
+func (c *MediaClient) UpdateOne(m *Media) *MediaUpdateOne {
+	mutation := newMediaMutation(c.config, OpUpdateOne, withMedia(m))
 	return &MediaUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
@@ -270,8 +270,8 @@ func (c *MediaClient) Delete() *MediaDelete {
 }
 
 // DeleteOne returns a builder for deleting the given entity.
-func (c *MediaClient) DeleteOne(pr *Media) *MediaDeleteOne {
-	return c.DeleteOneID(pr.ID)
+func (c *MediaClient) DeleteOne(m *Media) *MediaDeleteOne {
+	return c.DeleteOneID(m.ID)
 }
 
 // DeleteOneID returns a builder for deleting the given entity by its id.

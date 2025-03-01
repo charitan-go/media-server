@@ -31,11 +31,11 @@ func NewRestServer(echo *echo.Echo, api *api.Api) *RestServer {
 func (s *RestServer) setupRouting() {
 	s.echo.GET("/health", s.api.HealthCheck)
 
-	s.echo.POST("/create", s.api.MediaHandler.CreateMedia)
-
-	s.echo.POST("/get", s.api.MediaHandler.GetMedias)
-
-	s.echo.GET("/id/:mediaId", s.api.MediaHandler.GetMediaById)
+	// s.echo.POST("/create", s.api.MediaHandler.CreateMedia)
+	//
+	// s.echo.POST("/get", s.api.MediaHandler.GetMedias)
+	//
+	// s.echo.GET("/id/:mediaId", s.api.MediaHandler.GetMediaById)
 }
 
 func (s *RestServer) setupMiddleware() {

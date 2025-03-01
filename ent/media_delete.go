@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/charitan-go/media-server/ent/predicate"
 	"github.com/charitan-go/media-server/ent/media"
+	"github.com/charitan-go/media-server/ent/predicate"
 )
 
 // MediaDelete is the builder for deleting a Media entity.
@@ -20,56 +20,56 @@ type MediaDelete struct {
 }
 
 // Where appends a list predicates to the MediaDelete builder.
-func (pd *MediaDelete) Where(ps ...predicate.Media) *MediaDelete {
-	pd.mutation.Where(ps...)
-	return pd
+func (md *MediaDelete) Where(ps ...predicate.Media) *MediaDelete {
+	md.mutation.Where(ps...)
+	return md
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (pd *MediaDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, pd.sqlExec, pd.mutation, pd.hooks)
+func (md *MediaDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, md.sqlExec, md.mutation, md.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (pd *MediaDelete) ExecX(ctx context.Context) int {
-	n, err := pd.Exec(ctx)
+func (md *MediaDelete) ExecX(ctx context.Context) int {
+	n, err := md.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (pd *MediaDelete) sqlExec(ctx context.Context) (int, error) {
+func (md *MediaDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(media.Table, sqlgraph.NewFieldSpec(media.FieldID, field.TypeUUID))
-	if ps := pd.mutation.predicates; len(ps) > 0 {
+	if ps := md.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, pd.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, md.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	pd.mutation.done = true
+	md.mutation.done = true
 	return affected, err
 }
 
 // MediaDeleteOne is the builder for deleting a single Media entity.
 type MediaDeleteOne struct {
-	pd *MediaDelete
+	md *MediaDelete
 }
 
 // Where appends a list predicates to the MediaDelete builder.
-func (pdo *MediaDeleteOne) Where(ps ...predicate.Media) *MediaDeleteOne {
-	pdo.pd.mutation.Where(ps...)
-	return pdo
+func (mdo *MediaDeleteOne) Where(ps ...predicate.Media) *MediaDeleteOne {
+	mdo.md.mutation.Where(ps...)
+	return mdo
 }
 
 // Exec executes the deletion query.
-func (pdo *MediaDeleteOne) Exec(ctx context.Context) error {
-	n, err := pdo.pd.Exec(ctx)
+func (mdo *MediaDeleteOne) Exec(ctx context.Context) error {
+	n, err := mdo.md.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (pdo *MediaDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (pdo *MediaDeleteOne) ExecX(ctx context.Context) {
-	if err := pdo.Exec(ctx); err != nil {
+func (mdo *MediaDeleteOne) ExecX(ctx context.Context) {
+	if err := mdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

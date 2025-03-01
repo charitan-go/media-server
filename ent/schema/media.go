@@ -20,6 +20,11 @@ func (Media) Fields() []ent.Field {
 		field.UUID("readable_id", uuid.UUID{}).
 			Default(uuid.New).
 			StructTag(`json:"readableId"`),
+		field.Enum("media_type").
+			GoType(dto.MediaTypeEnum("")).
+			StructTag(`json:"mediaType"`),
+		field.String("project_id").
+			StructTag(`json:"projectId"`),
 		// field.String("name").
 		// 	NotEmpty(),
 		// field.String("description").
